@@ -1,7 +1,7 @@
 # Syncing to the community store
 
 When you change this packaging repo, copy the updated `docker-compose.yml`,
-`umbrel-app.yml`, and `hooks/` into
+`umbrel-app.yml`, `hooks/`, and `assets/` (for icons) into
 [harmalh/umbrel-community-store](https://github.com/harmalh/umbrel-community-store)
 under `harmalh-hermes-agent/`.
 

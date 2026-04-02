@@ -1,5 +1,5 @@
 manifestVersion: 1.1
-id: harmalh-hermes-agent
+id: hermes-agent
 name: Hermes Agent
 tagline: Self-improving AI agent with messaging gateway (Nous Research)
 icon: https://raw.githubusercontent.com/harmalh/umbrel-hermes-agent/main/assets/icon.svg
@@ -14,8 +14,7 @@ description: >-
   This Umbrel package uses two services: an nginx status/setup page (what you open
   from the dashboard) and a hermes service running gateway run. The image is a
   multi-arch build (amd64 + arm64) published to GHCR from upstream
-  NousResearch/hermes-agent — see the packaging repo README for build and digest
-  pinning.
+  NousResearch/hermes-agent.
 
 
   Expect roughly 2–4 GB RAM when browser tools are used; the image is large
@@ -24,17 +23,15 @@ description: >-
   edit files on the host per upstream docs.
 
 
-  **Install via community store:** https://github.com/harmalh/umbrel-community-store
+  Packaging: https://github.com/harmalh/umbrel-hermes-agent
 developer: Nous Research
 website: https://github.com/NousResearch/hermes-agent
 submitter: Harm Alhusen
-submission: https://github.com/harmalh/umbrel-community-store
+submission: https://github.com/getumbrel/umbrel-apps/pull/REPLACE_ME
 repo: https://github.com/NousResearch/hermes-agent
 support: https://github.com/NousResearch/hermes-agent/issues
 gallery: []
-releaseNotes: >-
-  Real Hermes gateway service plus status page; multi-arch GHCR image workflow;
-  Playwright-friendly shm_size; setup and logging instructions on the landing page.
+releaseNotes: ""
 dependencies: []
 path: ""
 defaultUsername: ""

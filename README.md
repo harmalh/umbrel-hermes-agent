@@ -2,15 +2,9 @@
 
 ## Purpose
 
-Packaging repo for **Hermes Agent** on Umbrel. It currently ships a **minimal
-nginx stub** so you can validate the native install path via the community
-store before replacing it with a real Hermes container.
+Umbrel packaging for **[Hermes Agent](https://github.com/NousResearch/hermes-agent)** (Nous Research): a **status/setup web page** (`web` / nginx) plus a **`hermes` service** running `gateway run` with persistent data under `${APP_DATA_DIR}/data` → `/opt/data`.
 
-## Intended Umbrel app role
-
-Run Hermes (or a companion service) as a native Umbrel app with a web UI or
-setup page. The stub proves compose, hooks, and store metadata; swap in a real
-image when ready.
+The official Docker Hub image [`nousresearch/hermes-agent`](https://hub.docker.com/r/nousresearch/hermes-agent) is **amd64-only**. This repo builds a **multi-arch** image (amd64 + arm64) for Umbrel Home / Raspberry Pi and publishes it to **GHCR**.
 
 ## Canonical install surface
 
@@ -18,37 +12,50 @@ Add the community store in umbrelOS:
 
 `https://github.com/harmalh/umbrel-community-store`
 
-Install **Hermes Agent** (`harmalh-hermes-agent`) from that store. Copy
-`docker-compose.yml`, `umbrel-app.yml`, and `hooks/` into the store’s
-`harmalh-hermes-agent/` folder when you cut a release (see store
-`docs/RELEASE_CHECKLIST.md`).
+Install **Hermes Agent** (`harmalh-hermes-agent`). Sync the store from this repo per [`docs/STORE_SYNC.md`](docs/STORE_SYNC.md) and the [umbrel-community-store release checklist](https://github.com/harmalh/umbrel-community-store/blob/main/docs/RELEASE_CHECKLIST.md).
 
-## Current status
+## Image build and digest pin
 
-**Minimal nginx stub** (`nginx:1.25-alpine`) with `hooks/pre-start` seeding
-`index.html` under `APP_DATA_DIR/www`. Not a production Hermes deployment.
+1. In GitHub: **Actions** → **Build Hermes Agent Image (Manual)** → **Run workflow**.
+2. Set **`hermes_ref`** to a upstream tag or SHA (e.g. `main` or a release tag).
+3. Set **`image_tag`** to the Umbrel package version you ship (e.g. `0.2.0`) so `docker-compose.yml` and the registry tag match.
+4. Enable **`push_image`** to publish to `ghcr.io/harmalh/hermes-agent-umbrel` (or your `image_repository`).
+5. Copy the printed **multi-arch digest** from the job log and pin the `hermes` service in `docker-compose.yml`:
 
-## Local development notes
+   `image: ghcr.io/harmalh/hermes-agent-umbrel:0.2.0@sha256:<digest>`
 
-- `id` in `umbrel-app.yml` is `harmalh-hermes-agent` to match the community store
-  folder name and Umbrel’s `APP_HOST` (`harmalh-hermes-agent_web_1`).
-- Replace `web` service with your real image; keep `app_proxy` env in sync with
-  `{folder}_{service}_1`.
+   Use the **index** digest from the workflow (manifest list), not a single-arch digest.
+
+## First-time Hermes setup on Umbrel
+
+Hermes expects API keys and config under **`APP_DATA_DIR/data`** (`.env`, `config.yaml`, etc.), mounted at `/opt/data` in the container.
+
+- **Option A:** Umbrel **Settings → Advanced → Terminal** (or SSH), then:
+
+  `docker exec -it harmalh-hermes-agent_hermes_1 bash`  
+  Run `hermes setup` or the interactive wizard per [upstream Docker docs](https://hermes-agent.nousresearch.com/docs/user-guide/docker/).
+
+- **Option B:** Edit `.env` / `config.yaml` on the host under the app data directory (see [configuration](https://hermes-agent.nousresearch.com/docs/user-guide/configuration)).
+
+Do **not** commit provider API keys to git. Do not use Umbrel `APP_SEED` as a substitute for third-party API keys.
+
+## Resource expectations
+
+Hermes ships Playwright/Chromium and is **large** on disk and RAM. Prefer **2–4 GB** container memory on the host where possible (see upstream [Docker guide](https://hermes-agent.nousresearch.com/docs/user-guide/docker/)).
 
 ## Local testing notes
 
 - Standalone `docker compose config` fails without Umbrel’s `app_proxy` merge; CI validates YAML only.
-- Device testing: follow `umbrel-community-store/docs/UMBREL_DEVICE_TESTING.md`.
+- Device testing: [`umbrel-community-store/docs/UMBREL_DEVICE_TESTING.md`](https://github.com/harmalh/umbrel-community-store/blob/main/docs/UMBREL_DEVICE_TESTING.md).
+- **Checklist (umbrel-dev or hardware):** run **Build Hermes Agent Image** with `push_image` first; install from the community store; open the app (status page); confirm `harmalh-hermes-agent_hermes_1` logs show gateway activity after configuration; **restart** the app and confirm files still exist under app data `data/`; optionally **uninstall** and confirm data removal matches expectations.
 
 ## CI/CD overview
 
 | Workflow | Purpose |
 |----------|---------|
-| `.github/workflows/ci.yml` | YAML validation on `main` (compose struct via PyYAML; no full `compose config`). |
+| `.github/workflows/ci.yml` | YAML validation on `main`. |
+| `.github/workflows/build-hermes-image.yml` | Manual multi-arch build; optional GHCR push; amd64 `hermes version` smoke test. |
 
-## TODO / roadmap
+## Official Umbrel App Store
 
-- Replace nginx with the real Hermes Agent image and configuration.
-- Custom icon and gallery in `umbrel-app.yml`.
-- Image build + GHCR (see TODO in `ci.yml`).
-- Optional `.env.example` when env surface is known.
+To open a PR to [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps), copy the app from [`submission-getumbrel/hermes-agent/`](submission-getumbrel/hermes-agent/) into your fork (app id **`hermes-agent`**, `APP_HOST` **`hermes-agent_web_1`**). Use the PR description template in [`submission-getumbrel/PR_DESCRIPTION.md`](submission-getumbrel/PR_DESCRIPTION.md).

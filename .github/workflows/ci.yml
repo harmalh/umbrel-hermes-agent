@@ -1,5 +1,3 @@
-# TODO: Add image build, registry push, release tagging, and Umbrel store updates.
-
 name: CI
 
 on:
@@ -35,6 +33,10 @@ jobs:
               Path("umbrel-app.yml"),
           ]
           roots += sorted(Path(".github/workflows").glob("*.yml"))
+          sub = Path("submission-getumbrel/hermes-agent")
+          if sub.is_dir():
+              roots.append(sub / "docker-compose.yml")
+              roots.append(sub / "umbrel-app.yml")
 
           failed = False
           for path in roots:

@@ -42,7 +42,7 @@ if [ ! -f "${APP_DATA_DIR}/www/index.html" ]; then
   <ul>
     <li>
       <strong>Interactive wizard:</strong> Umbrel <strong>Settings → Advanced → Terminal</strong>, then run<br/>
-      <code>docker exec -it harmalh-hermes-agent_hermes_1 bash</code><br/>
+      <code>docker exec -it hermes-agent_hermes_1 bash</code><br/>
       and <code>hermes setup</code> (or follow the upstream quick start).
     </li>
     <li>
@@ -53,14 +53,14 @@ if [ ! -f "${APP_DATA_DIR}/www/index.html" ]; then
 
   <h2>Logs &amp; health</h2>
   <ul>
-    <li>Umbrel app <strong>⋮</strong> menu → logs for this app, or Terminal → <code>docker logs harmalh-hermes-agent_hermes_1</code></li>
+    <li>Umbrel app <strong>⋮</strong> menu → logs for this app, or Terminal → <code>docker logs hermes-agent_hermes_1</code></li>
     <li>Upstream suggests <code>docker exec &lt;container&gt; hermes version</code> to verify the binary.</li>
   </ul>
 
-  <h2>Packaging</h2>
+  <h2>Upstream</h2>
   <p>
-    Community store: <a href="https://github.com/harmalh/umbrel-community-store">harmalh/umbrel-community-store</a><br/>
-    Source: <a href="https://github.com/harmalh/umbrel-hermes-agent">harmalh/umbrel-hermes-agent</a>
+    <a href="https://github.com/NousResearch/hermes-agent">NousResearch/hermes-agent</a>
+    · Packaging: <a href="https://github.com/harmalh/umbrel-hermes-agent">harmalh/umbrel-hermes-agent</a>
   </p>
 </body>
 </html>

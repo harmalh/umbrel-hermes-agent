@@ -1,0 +1,60 @@
+# TODO: Add image build, registry push, release tagging, and Umbrel store updates.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate YAML and Compose
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install pyyaml==6.0.2
+
+      - name: Parse YAML files
+        run: |
+          python << 'PY'
+          import sys
+          from pathlib import Path
+
+          import yaml
+
+          roots = [
+              Path("docker-compose.yml"),
+              Path("umbrel-app.yml"),
+          ]
+          roots += sorted(Path(".github/workflows").glob("*.yml"))
+
+          failed = False
+          for path in roots:
+              if not path.is_file():
+                  print(f"MISSING: {path}", file=sys.stderr)
+                  failed = True
+                  continue
+              try:
+                  with path.open(encoding="utf-8") as f:
+                      yaml.safe_load(f)
+                  print(f"OK: {path}")
+              except Exception as e:
+                  print(f"FAIL: {path}: {e}", file=sys.stderr)
+                  failed = True
+
+          sys.exit(1 if failed else 0)
+          PY
+
+      - name: Docker Compose config
+        env:
+          APP_DATA_DIR: /tmp/umbrel-ci
+          APP_SEED: ci-placeholder-not-for-production
+        run: docker compose -f docker-compose.yml config

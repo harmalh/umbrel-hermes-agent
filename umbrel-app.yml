@@ -1,0 +1,24 @@
+# TODO: Align fields with your target Umbrel OS / umbrel-app manifest version.
+# See: https://github.com/getumbrel/umbrel and official app packaging docs.
+
+manifestVersion: 1.1
+id: hermes-agent
+name: Hermes Agent
+tagline: TODO — short description for the Umbrel app store
+icon: ""
+category: developer
+version: "0.0.0"
+port: 0
+description: >-
+  TODO: Describe the Hermes agent role on Umbrel once implementation is fixed.
+developer: Harm Alhusen
+website: ""
+repo: https://github.com/harmalh/umbrel-hermes-agent
+support: https://github.com/harmalh/umbrel-hermes-agent/issues
+gallery: []
+releaseNotes: >-
+  Initial repository scaffold. No production app yet.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

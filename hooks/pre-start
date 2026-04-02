@@ -1,0 +1,25 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+mkdir -p "${APP_DATA_DIR}/www"
+if [ ! -f "${APP_DATA_DIR}/www/index.html" ]; then
+    cat > "${APP_DATA_DIR}/www/index.html" << 'HTML'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Hermes Agent (stub)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem; }
+    code { background: #f4f4f4; padding: 0.1rem 0.3rem; }
+  </style>
+</head>
+<body>
+  <h1>Hermes Agent</h1>
+  <p>Minimal Umbrel placeholder. Replace with the real Hermes Agent image and
+  configuration.</p>
+  <p>Community store: <code>harmalh/umbrel-community-store</code></p>
+</body>
+</html>
+HTML
+fi

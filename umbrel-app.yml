@@ -1,23 +1,26 @@
-# TODO: Align fields with your target Umbrel OS / umbrel-app manifest version.
-# See: https://github.com/getumbrel/umbrel and official app packaging docs.
-
 manifestVersion: 1.1
-id: hermes-agent
+id: harmalh-hermes-agent
 name: Hermes Agent
-tagline: TODO — short description for the Umbrel app store
-icon: ""
+tagline: Minimal Umbrel stub — replace with real Hermes service
+icon: https://svgur.com/i/mvA.svg
 category: developer
-version: "0.0.0"
-port: 0
+version: "0.1.0"
+port: 80
 description: >-
-  TODO: Describe the Hermes agent role on Umbrel once implementation is fixed.
+  Placeholder web page served by nginx. Use this to validate the community store
+  and Umbrel install path before swapping in a real Hermes Agent container.
+
+
+  **Install via community store:** https://github.com/harmalh/umbrel-community-store
 developer: Harm Alhusen
-website: ""
+website: https://github.com/harmalh/umbrel-hermes-agent
+submitter: Harm Alhusen
+submission: https://github.com/harmalh/umbrel-community-store
 repo: https://github.com/harmalh/umbrel-hermes-agent
 support: https://github.com/harmalh/umbrel-hermes-agent/issues
 gallery: []
 releaseNotes: >-
-  Initial repository scaffold. No production app yet.
+  Initial minimal nginx stub for native Umbrel testing.
 dependencies: []
 path: ""
 defaultUsername: ""

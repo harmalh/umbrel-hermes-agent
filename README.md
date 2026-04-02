@@ -37,14 +37,14 @@ Install **Hermes Agent** (`harmalh-hermes-agent`) from that store. Copy
 
 ## Local testing notes
 
-- `docker compose config` with `APP_DATA_DIR` set (CI does this).
+- Standalone `docker compose config` fails without Umbrel’s `app_proxy` merge; CI validates YAML only.
 - Device testing: follow `umbrel-community-store/docs/UMBREL_DEVICE_TESTING.md`.
 
 ## CI/CD overview
 
 | Workflow | Purpose |
 |----------|---------|
-| `.github/workflows/ci.yml` | YAML validation and `docker compose config` on `main`. |
+| `.github/workflows/ci.yml` | YAML validation on `main` (compose struct via PyYAML; no full `compose config`). |
 
 ## TODO / roadmap
 

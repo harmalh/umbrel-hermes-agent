@@ -4,7 +4,7 @@ name: Hermes Agent
 tagline: Self-improving AI agent with messaging gateway (Nous Research)
 icon: https://raw.githubusercontent.com/harmalh/umbrel-hermes-agent/main/assets/icon.svg
 category: ai
-version: "0.2.0"
+version: "0.2.1"
 port: 80
 description: >-
   Hermes Agent runs a persistent messaging gateway (Telegram, Discord, Slack,
@@ -14,7 +14,7 @@ description: >-
   This Umbrel package uses two services: an nginx status/setup page (what you open
   from the dashboard) and a hermes service running gateway run. The image is a
   multi-arch build (amd64 + arm64) published to GHCR from upstream
-  NousResearch/hermes-agent.
+  NousResearch/hermes-agent, digest-pinned in compose.
 
 
   Expect roughly 2–4 GB RAM when browser tools are used; the image is large

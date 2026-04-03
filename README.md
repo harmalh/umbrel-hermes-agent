@@ -16,15 +16,16 @@ Install **Hermes Agent** (`harmalh-hermes-agent`). Sync the store from this repo
 
 ## Image build and digest pin
 
-1. In GitHub: **Actions** → **Build Hermes Agent Image (Manual)** → **Run workflow**.
-2. Set **`hermes_ref`** to a upstream tag or SHA (e.g. `main` or a release tag).
-3. Set **`image_tag`** to the Umbrel package version you ship (e.g. `0.2.0`) so `docker-compose.yml` and the registry tag match.
-4. Enable **`push_image`** to publish to `ghcr.io/harmalh/hermes-agent-umbrel` (or your `image_repository`).
-5. Copy the printed **multi-arch digest** from the job log and pin the `hermes` service in `docker-compose.yml`:
+**Published image:** `ghcr.io/harmalh/hermes-agent-umbrel:0.2.0` with multi-arch index digest  
+`sha256:a7ee8728416b9e368b108f645978f4426b6556d64dc20c6a0a7427a21ba8e1ea` (GitHub Actions run [23928504678](https://github.com/harmalh/umbrel-hermes-agent/actions/runs/23928504678), upstream `main` at build time).
 
-   `image: ghcr.io/harmalh/hermes-agent-umbrel:0.2.0@sha256:<digest>`
+To rebuild and publish a new version:
 
-   Use the **index** digest from the workflow (manifest list), not a single-arch digest.
+1. **Actions** → **Build Hermes Agent Image (Manual)** → **Run workflow**.
+2. Set **`hermes_ref`** to an upstream tag or SHA.
+3. Set **`image_tag`** (e.g. `0.3.0`) so registry tags match `docker-compose.yml`.
+4. Enable **`push_image`**.
+5. Copy the printed **multi-arch index digest** and update the `hermes` `image:` line in this repo and in `umbrel-community-store`.
 
 ## First-time Hermes setup on Umbrel
 

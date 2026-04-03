@@ -13,10 +13,9 @@ services:
     volumes:
       - ${APP_DATA_DIR}/www:/usr/share/nginx/html:ro
 
-  # After GHCR push: pin multi-arch index digest from workflow log, e.g.
-  # image: ghcr.io/harmalh/hermes-agent-umbrel:0.2.0@sha256:...
+  # Multi-arch index digest from workflow run 23928504678 (main @ 2026-04-03).
   hermes:
-    image: ghcr.io/harmalh/hermes-agent-umbrel:0.2.0
+    image: ghcr.io/harmalh/hermes-agent-umbrel:0.2.0@sha256:a7ee8728416b9e368b108f645978f4426b6556d64dc20c6a0a7427a21ba8e1ea
     restart: on-failure
     init: true
     stop_grace_period: 1m

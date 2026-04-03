@@ -20,8 +20,7 @@ Upload 3–5 screenshots (1440×900 PNG) of the Umbrel status page and/or upstre
 
 ## Notes for reviewers
 
-- **Image:** `ghcr.io/harmalh/hermes-agent-umbrel:0.2.0` — multi-arch (amd64 + arm64). Replace `REPLACE_ME` in `umbrel-app.yml` `submission:` with this PR URL after opening.
-- **Digest:** After merge consideration, pin `image: …@sha256:<multi-arch-index-digest>` per project conventions (run packaging workflow with `push_image` and copy digest from Actions log).
+- **Image:** `ghcr.io/harmalh/hermes-agent-umbrel:0.2.0@sha256:a7ee8728416b9e368b108f645978f4426b6556d64dc20c6a0a7427a21ba8e1ea` — multi-arch index digest from [Actions run 23928504678](https://github.com/harmalh/umbrel-hermes-agent/actions/runs/23928504678). Replace `REPLACE_ME` in `umbrel-app.yml` `submission:` with this PR URL after opening.
 - **No built-in browser UI:** Hermes gateway targets Telegram/Discord/etc.; `web` is nginx with setup instructions (per Umbrel App Framework guidance for headless apps).
 - **First run:** Users run `hermes setup` via `docker exec` or edit `.env` under `APP_DATA_DIR/data`.
 

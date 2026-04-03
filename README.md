@@ -27,6 +27,22 @@ To rebuild and publish a new version:
 4. Enable **`push_image`**.
 5. Copy the printed **multi-arch index digest** and update the `hermes` `image:` line in this repo and in `umbrel-community-store`.
 
+### GHCR package must be public (Umbrel install)
+
+umbrelOS pulls images **without** registry login. If install **fails immediately** (often at “downloading” / 0%), the **`hermes-agent-umbrel`** package on GitHub Container Registry is almost certainly **private**.
+
+1. Open **[your packages](https://github.com/harmalh?tab=packages)** (or **Packages** on your profile).
+2. Select **`hermes-agent-umbrel`** → **Package settings**.
+3. Under **Danger Zone** (or **Manage Actions access** / visibility), set **Change package visibility** to **Public**.
+
+Confirm from any machine that is **not** logged in to GHCR:
+
+```bash
+docker pull ghcr.io/harmalh/hermes-agent-umbrel@sha256:a7ee8728416b9e368b108f645978f4426b6556d64dc20c6a0a7427a21ba8e1ea
+```
+
+If that errors with **denied** / **unauthorized**, the package is still private.
+
 ## First-time Hermes setup on Umbrel
 
 Hermes expects API keys and config under **`APP_DATA_DIR/data`** (`.env`, `config.yaml`, etc.), mounted at `/opt/data` in the container.

@@ -85,6 +85,9 @@ jobs:
           echo "Pin this multi-arch index digest in docker-compose.yml (hermes service):"
           echo "  image: ${{ steps.vars.outputs.image_repository }}:<tag>@${{ steps.buildx.outputs.digest }}"
           echo "Full digest value: ${{ steps.buildx.outputs.digest }}"
+          echo ""
+          echo "Umbrel: set this GHCR package visibility to PUBLIC (GitHub profile -> Packages ->"
+          echo "  hermes-agent-umbrel -> Package settings) or installs will fail at docker pull."
 
       - name: Local smoke test (amd64 only)
         run: |

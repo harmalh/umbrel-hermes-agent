@@ -4,7 +4,7 @@ name: Hermes Agent
 tagline: Self-improving AI agent with messaging gateway (Nous Research)
 icon: https://raw.githubusercontent.com/harmalh/umbrel-hermes-agent/main/assets/icon.svg
 category: ai
-version: "0.2.1"
+version: "0.2.2"
 port: 80
 description: >-
   Hermes Agent runs a persistent messaging gateway (Telegram, Discord, Slack,
@@ -32,8 +32,7 @@ repo: https://github.com/NousResearch/hermes-agent
 support: https://github.com/NousResearch/hermes-agent/issues
 gallery: []
 releaseNotes: >-
-  Pin multi-arch GHCR image (0.2.0@sha256:a7ee8728416b…) from Actions run 23928504678;
-  upstream Hermes main at build time. No functional change vs 0.2.0 compose layout.
+  Compose: shm_size 1g (Docker unit). Docs: GHCR package must be public or Umbrel install fails at pull.
 dependencies: []
 path: ""
 defaultUsername: ""

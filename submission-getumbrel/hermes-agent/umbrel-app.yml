@@ -4,7 +4,7 @@ name: Hermes Agent
 tagline: Self-improving AI agent with messaging gateway (Nous Research)
 icon: https://raw.githubusercontent.com/harmalh/umbrel-hermes-agent/main/assets/icon.svg
 category: ai
-version: "0.2.1"
+version: "0.2.2"
 port: 80
 description: >-
   Hermes Agent runs a persistent messaging gateway (Telegram, Discord, Slack,

@@ -19,7 +19,7 @@ services:
     restart: on-failure
     init: true
     stop_grace_period: 1m
-    shm_size: "1gb"
+    shm_size: "1g"
     command: ["gateway", "run"]
     volumes:
       - ${APP_DATA_DIR}/data:/opt/data

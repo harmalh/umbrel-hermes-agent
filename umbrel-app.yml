@@ -1,29 +1,28 @@
 manifestVersion: 1.1
 id: harmalh-hermes-agent
-name: Hermes Agent
-tagline: Self-improving AI agent with messaging gateway (Nous Research)
+name: Hermes Gateway
+tagline: Headless Hermes runtime and messaging gateway
 icon: https://raw.githubusercontent.com/harmalh/umbrel-hermes-agent/main/assets/icon.svg
 category: ai
-version: "0.2.3"
+version: "0.2.5"
 port: 23110
 description: >-
-  Hermes Agent runs a persistent messaging gateway (Telegram, Discord, Slack,
-  WhatsApp, Signal, and more) from a Docker container with data under APP_DATA_DIR.
+  Hermes Gateway runs the Hermes messaging and automation runtime as a
+  background service on Umbrel.
 
 
-  This Umbrel package uses two services: an nginx status/setup page (what you open
-  from the dashboard) and a hermes service running gateway run. The image is a
-  multi-arch build (amd64 + arm64) published to GHCR from upstream
-  NousResearch/hermes-agent. The GHCR image is digest-pinned for reproducible installs.
+  This package keeps the current two-service topology: an nginx status/setup
+  page in the browser and a hermes container running gateway run with data under
+  APP_DATA_DIR.
 
 
-  Expect roughly 2–4 GB RAM when browser tools are used; the image is large
-  (Debian + Playwright/Chromium). First-time API keys and config live in the
-  app data folder (.env, config.yaml); use Umbrel Terminal and docker exec or
-  edit files on the host per upstream docs.
+  Use this app when you want a headless Hermes gateway for messaging platforms
+  and background automation. Use the separate Hermes Workspace app for the full
+  browser UI.
 
 
-  **Install via community store:** https://github.com/harmalh/umbrel-community-store
+  The image is a multi-arch build published to GHCR and pinned in compose for
+  reproducible installs.
 developer: Nous Research
 website: https://github.com/NousResearch/hermes-agent
 submitter: Harm Alhusen
@@ -32,9 +31,11 @@ repo: https://github.com/NousResearch/hermes-agent
 support: https://github.com/NousResearch/hermes-agent/issues
 gallery: []
 releaseNotes: >-
-  Publish on port 23110 instead of 80 so Umbrel app_proxy does not collide with
-  host services. Reminder: hermes-agent-umbrel on GHCR must be public for
-  anonymous pulls during install.
+  Rebuild Hermes Gateway against the newer stable `NousResearch/hermes-agent`
+  release `v2026.4.8` and refresh the digest-pinned GHCR image.
+
+  This keeps the Umbrel package topology unchanged while pulling in upstream
+  runtime fixes from the latest tagged Hermes release.
 dependencies: []
 path: ""
 defaultUsername: ""

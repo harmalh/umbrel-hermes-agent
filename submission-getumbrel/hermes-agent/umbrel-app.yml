@@ -1,10 +1,10 @@
 manifestVersion: 1.1
 id: hermes-agent
-name: Hermes Agent
-tagline: Self-improving AI agent with messaging gateway (Nous Research)
+name: Hermes Gateway
+tagline: Headless Hermes runtime and messaging gateway
 icon: https://raw.githubusercontent.com/harmalh/umbrel-hermes-agent/main/assets/icon.svg
 category: ai
-version: "0.2.2"
+version: "0.2.5"
 port: 80
 description: >-
   Hermes Agent runs a persistent messaging gateway (Telegram, Discord, Slack,
@@ -31,7 +31,12 @@ submission: https://github.com/getumbrel/umbrel-apps/pull/REPLACE_ME
 repo: https://github.com/NousResearch/hermes-agent
 support: https://github.com/NousResearch/hermes-agent/issues
 gallery: []
-releaseNotes: ""
+releaseNotes: >-
+  Rebuild Hermes Gateway against the newer stable `NousResearch/hermes-agent`
+  release `v2026.4.8` and refresh the digest-pinned GHCR image.
+
+  This keeps the Umbrel package topology unchanged while pulling in upstream
+  runtime fixes from the latest tagged Hermes release.
 dependencies: []
 path: ""
 defaultUsername: ""
